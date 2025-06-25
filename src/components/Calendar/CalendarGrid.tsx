@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { format, isSameDay } from 'date-fns';
 import { DndContext, DragEndEvent, useDraggable, useDroppable } from '@dnd-kit/core';
@@ -23,9 +22,10 @@ const DraggableEvent: React.FC<DraggableEventProps> = ({ event, onClick }) => {
     data: event
   });
 
-  const style = transform ? {
-    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-  } : undefined;
+  const style = {
+    transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : undefined,
+    backgroundColor: event.color,
+  };
 
   return (
     <div
@@ -37,10 +37,6 @@ const DraggableEvent: React.FC<DraggableEventProps> = ({ event, onClick }) => {
         "text-xs p-1 mb-1 rounded cursor-pointer text-white truncate transition-opacity",
         isDragging && "opacity-50"
       )}
-      style={{
-        ...style,
-        backgroundColor: event.color,
-      }}
       onClick={(e) => {
         e.stopPropagation();
         onClick(event);
